@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Management</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:#f4f6f9;
+      padding:30px;
+    }
+
+    .container{
+      max-width:900px;
+      margin:auto;
+      background:white;
+      padding:25px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align:center;
+      margin-bottom:20px;
+      color:#333;
+    }
+
+    .form-section{
+      display:flex;
+      gap:10px;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
+
+    .form-section input{
+      flex:1;
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:5px;
+    }
+
+    .form-section button{
+      padding:10px 20px;
+      border:none;
+      background:#007bff;
+      color:white;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    .form-section button:hover{
+      background:#0056b3;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    table th, table td{
+      border:1px solid #ddd;
+      padding:12px;
+      text-align:center;
+    }
+
+    table th{
+      background:#007bff;
+      color:white;
+    }
+
+    .edit-btn{
+      background:orange;
+      color:white;
+      border:none;
+      padding:6px 12px;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    .delete-btn{
+      background:red;
+      color:white;
+      border:none;
+      padding:6px 12px;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    .edit-btn:hover{
+      background:darkorange;
+    }
+
+    .delete-btn:hover{
+      background:darkred;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Product Management System</h1>
+
+    <div class="form-section">
+      <input type="text" id="productName" placeholder="Product Name">
+      <input type="number" id="productPrice" placeholder="Price">
+      <input type="number" id="productQty" placeholder="Quantity">
+
+      <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody id="productTable">
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let products = [];
+    let editIndex = -1;
+
+    function addProduct() {
+
+      let name = document.getElementById("productName").value;
+      let price = document.getElementById("productPrice").value;
+      let qty = document.getElementById("productQty").value;
+
+      if(name === "" || price === "" || qty === ""){
+        alert("Please fill all fields");
+        return;
+      }
+
+      if(editIndex === -1){
+
+        let product = {
+          id: products.length + 1,
+          name: name,
+          price: price,
+          qty: qty
+        };
+
+        products.push(product);
+
+      } else {
+
+        products[editIndex].name = name;
+        products[editIndex].price = price;
+        products[editIndex].qty = qty;
+
+        editIndex = -1;
+      }
+
+      clearFields();
+      displayProducts();
+    }
+
+    function displayProducts(){
+
+      let table = document.getElementById("productTable");
+
+      table.innerHTML = "";
+
+      products.forEach((product, index) => {
+
+        table.innerHTML += `
+          <tr>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>₹${product.price}</td>
+            <td>${product.qty}</td>
+            <td>
+              <button class="edit-btn" onclick="editProduct(${index})">Edit</button>
+
+              <button class="delete-btn" onclick="deleteProduct(${index})">Delete</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function editProduct(index){
+
+      document.getElementById("productName").value = products[index].name;
+
+      document.getElementById("productPrice").value = products[index].price;
+
+      document.getElementById("productQty").value = products[index].qty;
+
+      editIndex = index;
+    }
+
+    function deleteProduct(index){
+
+      products.splice(index,1);
+
+      displayProducts();
+    }
+
+    function clearFields(){
+
+      document.getElementById("productName").value = "";
+
+      document.getElementById("productPrice").value = "";
+
+      document.getElementById("productQty").value = "";
+    }
+  </script>
+
+</body>
+</html>

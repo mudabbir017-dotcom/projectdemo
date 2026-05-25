@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Cart</title>
+  <style>
+    
+.cart-table {
+  margin: auto;
+  width: 60%;
+  border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+.cart-table th {
+  background-color: #333;
+  color: white;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Cart</h1>
+  </header>
+
+  <main>
+    <table class="cart-table">
+      <tr>
+        <th>Food Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+      <tr>
+        <td>Burger</td>
+        <td>2</td>
+        <td>Rs. 300</td>
+      </tr>
+      <tr>
+        <td>Pizza</td>
+        <td>1</td>
+        <td>Rs. 250</td>
+      </tr>
+      <tr>
+        <td colspan="2"><strong>Total</strong></td>
+        <td><strong>Rs. 550</strong></td>
+      </tr>
+    </table>
+
+    <form action="OrderServlet" method="post">
+      <input type="submit" value="Place Order" class="btn">
+    </form>
+  </main>
+</body>
+</html>

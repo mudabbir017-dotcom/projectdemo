@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="sc.js"></script>
+    <style>
+       body{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 100vh;
+       
+       }
+       .form{
+         border:1px solid blue;
+        border-radius: 5px;
+         padding: 80px;               /* inner spacing */
+      background-color: white;
+       }
+       h2{
+        
+       }
+        input[type="submit"] {
+      background-color: blue;
+      color: white;
+  
+      
+    }
+
+    input[type="submit"]:hover {
+      background-color: darkblue;
+    }
+     input {
+      margin: 5px 0;
+      padding: 8px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 9px;
+    }
+    </style>
+</head>
+<body>
+    <div class="form">
+     <h2>Registration Page</h2>   
+  <form onsubmit="return validateRegistration()">
+    Name: <input type="text" id="name"><br><br>
+    Email: <input type="text" id="email"><br><br>
+    Password: <input type="password" id="password"><br><br>
+    Confirm Password: <input type="password" id="confirm"><br><br>
+    <input type="submit" value="Register">
+  </form>
+  </div>
+</body>
+</html>
